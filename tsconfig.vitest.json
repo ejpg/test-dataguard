@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.app.json",
   "exclude": [],
+  "include": ["./api/db.json"],
   "compilerOptions": {
     "composite": true,
     "lib": [],

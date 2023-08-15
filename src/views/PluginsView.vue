@@ -30,7 +30,7 @@ const tabData = computed(() => pluginsStore.getTabData(route.params.tab as strin
 
 const plugins: ComputedRef<{ [key: string]: Plugin }> = computed(() => {
   const result: { [key: string]: Plugin } = {}
-  // If the array is not sorted it will change the order when the status are changed-
+  // If the array is not sorted it will change the order when the status are changed
   const pluginsKeys = [...tabData.value.active, ...tabData.value.inactive].sort()
 
   for (const pluginKey of pluginsKeys) {

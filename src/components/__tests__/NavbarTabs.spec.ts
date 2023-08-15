@@ -4,6 +4,7 @@ import Component from '@/components/NavbarTabs.vue'
 import { createTestingPinia } from '@pinia/testing'
 import plugins from '../../../api/db.json'
 import { RouterLinkStub } from '@vue/test-utils'
+import '@testing-library/jest-dom'
 
 describe('NavbarTabs', () => {
   test('Renders tabs', async () => {

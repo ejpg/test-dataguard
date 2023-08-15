@@ -28,9 +28,11 @@ const pluginsStateLabel: ComputedRef<string> = computed(() =>
 const stateToggle = ref(true)
 
 const toggleState = (event: Event): void => {
-  pluginsStore.changeAllPluginsStatus(event.target!.checked).then((response) => {
-    if (response.error) stateToggle.value = !event.target!.checked
-  })
+  pluginsStore
+    .changeAllPluginsStatus((event.target as HTMLInputElement).checked)
+    .then((response) => {
+      if (response.error) stateToggle.value = !(event.target as HTMLInputElement).checked
+    })
 }
 </script>
 

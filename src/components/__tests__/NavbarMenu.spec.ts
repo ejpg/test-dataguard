@@ -3,6 +3,7 @@ import { fireEvent, render } from '@testing-library/vue'
 import Component from '@/components/NavbarMenu.vue'
 import { createTestingPinia } from '@pinia/testing'
 import plugins from '../../../api/db.json'
+import '@testing-library/jest-dom'
 
 describe('NavbarMenu', () => {
   test('Toggle inits as enabled', async () => {
