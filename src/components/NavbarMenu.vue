@@ -6,10 +6,10 @@
     <NavbarTabs />
     <div
       class="left-sidebar__disable-button-wrapper"
-      :class="`left-sidebar__disable-button-wrapper--${stateToggle ? 'enabled' : 'disabled'}`"
+      :class="`left-sidebar__disable-button-wrapper--${toggleState ? 'enabled' : 'disabled'}`"
     >
       <h3>All plugins {{ pluginsStateLabel }}</h3>
-      <ButtonToggle v-model="stateToggle" @input="toggleState" />
+      <ButtonToggle v-model="toggleState" @input="changeToggleState" />
     </div>
   </div>
 </template>
@@ -23,15 +23,15 @@ import { usePluginsStore } from '@/stores/plugins'
 const pluginsStore = usePluginsStore()
 
 const pluginsStateLabel: ComputedRef<string> = computed(() =>
-  stateToggle.value ? 'enabled' : 'disabled'
+  toggleState.value ? 'enabled' : 'disabled'
 )
-const stateToggle = ref(true)
+const toggleState = ref(true)
 
-const toggleState = (event: Event): void => {
+const changeToggleState = (event: Event): void => {
   pluginsStore
     .changeAllPluginsStatus((event.target as HTMLInputElement).checked)
     .then((response) => {
-      if (response.error) stateToggle.value = !(event.target as HTMLInputElement).checked
+      if (response.error) toggleState.value = !(event.target as HTMLInputElement).checked
     })
 }
 </script>

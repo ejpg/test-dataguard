@@ -22,10 +22,13 @@
 import { computed, onBeforeMount, ref } from 'vue'
 import ButtonToggle from './ButtonToggle.vue'
 import { usePluginsStore } from '@/stores/plugins'
-import { PLUGIN_STATES } from '@/shared/constants'
 import { useRoute } from 'vue-router'
 
 const props = defineProps({
+  active: {
+    type: Boolean,
+    required: true
+  },
   disabled: {
     type: Boolean,
     required: true
@@ -37,10 +40,6 @@ const props = defineProps({
   plugin: {
     type: Object,
     required: true
-  },
-  state: {
-    type: String,
-    required: true
   }
 })
 
@@ -51,7 +50,7 @@ const pluginsStore = usePluginsStore()
 const toggleState = ref()
 
 onBeforeMount(() => {
-  toggleState.value = props.state === PLUGIN_STATES.ACTIVE
+  toggleState.value = props.active
 })
 
 const toggleLabel = computed(() => {

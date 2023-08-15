@@ -8,8 +8,8 @@
         :key="getId(key)"
         :id="getId(key)"
         :plugin="plugin"
-        :state="getPluginState(key as string)"
         :disabled="isPluginDisabled(key as string)"
+        :active="isPluginActive(key as string)"
       />
     </div>
   </div>
@@ -20,7 +20,6 @@ import PluginCard from '@/components/PluginCard.vue'
 import { useRoute } from 'vue-router'
 import { usePluginsStore } from '@/stores/plugins'
 import { computed, type ComputedRef } from 'vue'
-import { PLUGIN_STATES } from '@/shared/constants'
 import type { Plugin } from '@/models/plugins'
 
 const route = useRoute()
@@ -44,20 +43,12 @@ const getId = (key: string | number) => {
   return key as string
 }
 
-const isPluginDisabled = (pluginKey: string): boolean => {
-  return tabData.value!.disabled.includes(pluginKey)
+const isPluginActive = (pluginKey: string): boolean => {
+  return tabData.value!.active.includes(pluginKey) ? true : false
 }
 
-const getPluginState = (pluginKey: string): string => {
-  let state = ''
-
-  if (tabData.value!.active.includes(pluginKey)) {
-    state = PLUGIN_STATES.ACTIVE
-  } else if (tabData.value!.inactive.includes(pluginKey)) {
-    state = PLUGIN_STATES.INACTIVE
-  }
-
-  return state
+const isPluginDisabled = (pluginKey: string): boolean => {
+  return tabData.value!.disabled.includes(pluginKey)
 }
 </script>
 

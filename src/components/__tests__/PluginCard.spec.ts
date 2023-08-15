@@ -4,7 +4,6 @@ import Component from '@/components/PluginCard.vue'
 import { createTestingPinia } from '@pinia/testing'
 import plugins from '../../../api/db.json'
 import { RouterLinkStub } from '@vue/test-utils'
-import { PLUGIN_STATES } from '@/shared/constants'
 import '@testing-library/jest-dom'
 
 const plugin = plugins.data.plugins['plugin1']
@@ -50,9 +49,9 @@ const renderComponent = () =>
       }
     },
     props: {
+      active: true,
       disabled: false,
       id: 'plugin1',
-      state: PLUGIN_STATES.ACTIVE,
       plugin
     }
   })
