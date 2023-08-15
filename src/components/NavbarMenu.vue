@@ -59,13 +59,12 @@ const toggleState = (event: Event): void => {
     display: flex;
     justify-content: space-between;
     &--enabled {
-      background: rgb(91, 200, 141);
-      background: linear-gradient(0deg, rgba(91, 200, 141, 0.7) 0%, transparent 40%);
+      background: $enable-plugins-background;
+      background: $enable-plugins-gradient;
     }
     &--disabled {
-      background: rgb(198, 48, 64);
-
-      background: linear-gradient(0deg, rgba(198, 48, 64, 0.7) 0%, transparent 40%);
+      background: $disable-plugins-background;
+      background: $disable-plugins-gradient;
     }
   }
 }

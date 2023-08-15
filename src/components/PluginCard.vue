@@ -34,8 +34,6 @@ const props = defineProps({
     type: String,
     required: true
   },
-
-  //FIX TYPE
   plugin: {
     type: Object,
     required: true

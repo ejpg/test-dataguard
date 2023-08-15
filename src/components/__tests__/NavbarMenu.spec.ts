@@ -4,6 +4,7 @@ import Component from '@/components/NavbarMenu.vue'
 import { createTestingPinia } from '@pinia/testing'
 import plugins from '../../../api/db.json'
 import '@testing-library/jest-dom'
+import { RouterLinkStub } from '@vue/test-utils'
 
 describe('NavbarMenu', () => {
   test('Toggle inits as enabled', async () => {
@@ -35,7 +36,7 @@ const renderComponent = () =>
         })
       ],
       stubs: {
-        'router-link': { template: '<a/>' }
+        RouterLink: RouterLinkStub
       }
     }
   })
