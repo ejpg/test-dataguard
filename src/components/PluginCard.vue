@@ -62,7 +62,11 @@ const toggleLabel = computed(() => {
 
 const changeToggleState = (event: any): void => {
   //FIX PARAM TYPE
-  pluginsStore.changePluginStatus(props.id, event.target.checked, route.params.tab as string)
+  pluginsStore
+    .changePluginStatus(props.id, event.target.checked, route.params.tab as string)
+    .then((response) => {
+      if (response.error) toggleState.value = !event.target.checked
+    })
 }
 </script>
 

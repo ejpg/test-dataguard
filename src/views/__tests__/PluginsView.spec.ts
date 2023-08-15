@@ -1,35 +1,15 @@
-import { expect, test, vi, describe, beforeEach } from 'vitest'
+import { expect, test, describe } from 'vitest'
 import { render } from '@testing-library/vue'
 import Component from '@/views/PluginsView.vue'
 import { createTestingPinia } from '@pinia/testing'
 import plugins from '../../../api/db.json'
-import { useRoute, useRouter } from 'vue-router'
-import * as matchers from '@testing-library/jest-dom/matchers'
 import { RouterLinkStub } from '@vue/test-utils'
 import { usePluginsStore } from '@/stores/plugins'
-
-expect.extend(matchers)
-
-vi.mock('vue-router')
 
 const tab = 'tab1'
 const tabData = plugins.data.tabdata[tab]
 
 describe('PluginsView', () => {
-  useRouter.mockReturnValue({
-    push: vi.fn()
-  })
-
-  useRoute.mockReturnValue({
-    params: {
-      tab
-    }
-  })
-
-  beforeEach(() => {
-    useRouter().push.mockReset()
-  })
-
   test('Renders title', () => {
     const { getByText } = renderComponent()
 

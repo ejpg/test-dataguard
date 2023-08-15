@@ -8,16 +8,32 @@ const API_URL = 'https://run.mocky.io/v3'
 export const usePluginsStore = defineStore('plugins', () => {
   const plugins = ref<AxiosResponse<PluginsResponse>>()
 
-  const changeAllPluginsStatus = (newStatus: boolean): void => {
-    for (const tab of plugins.value!.data.tabs) {
-      const tabData = plugins.value!.data.tabdata[tab]
+  const changeAllPluginsStatus = (newStatus: boolean): Promise<{ error: Object | null }> => {
+    return axios
+      .post(`${API_URL}/f3eb91da-0214-4196-a9b2-6d31c8a94056`, { newStatus })
+      .then((res) => {
+        if (res.data.errors) {
+          alert('There was an error trying to change all plugins state')
+          return { error: res.data.errors }
+        }
 
-      if (newStatus) {
-        tabData.disabled = []
-      } else {
-        tabData.disabled = [...tabData.disabled, ...tabData.active, ...tabData.inactive]
-      }
-    }
+        for (const tab of plugins.value!.data.tabs) {
+          const tabData = plugins.value!.data.tabdata[tab]
+
+          if (newStatus) {
+            tabData.disabled = []
+          } else {
+            tabData.disabled = [...tabData.disabled, ...tabData.active, ...tabData.inactive]
+          }
+        }
+
+        return { error: null }
+      })
+      .catch((error) => {
+        alert('There was an error trying to change all plugins state')
+
+        return { error }
+      })
   }
 
   const getTabData = (tab: string): Tabdata => {
@@ -30,8 +46,6 @@ export const usePluginsStore = defineStore('plugins', () => {
       .then((res) => {
         if (res.data.errors) {
           alert('There was an error getting the data from the server')
-
-          return
         }
 
         addStatusToDisabledPlugins(res.data.data)
@@ -43,13 +57,17 @@ export const usePluginsStore = defineStore('plugins', () => {
       })
   }
 
-  const changePluginStatus = (id: string, newStatus: boolean, tab: string): Promise<void> => {
+  const changePluginStatus = (
+    id: string,
+    newStatus: boolean,
+    tab: string
+  ): Promise<{ error: Object | null }> => {
     return axios
       .post(`${API_URL}/f3eb91da-0214-4196-a9b2-6d31c8a94056`, { id, newStatus })
       .then((res) => {
         if (res.data.errors) {
           alert('There was an error trying to modify your plugin')
-          return
+          return { error: res.data.errors }
         }
 
         const tabData = plugins.value?.data.tabdata[tab]
@@ -62,9 +80,13 @@ export const usePluginsStore = defineStore('plugins', () => {
 
         // Add element in new array
         tabData![newStatusArrayName].push(id)
+
+        return { error: null }
       })
-      .catch(() => {
+      .catch((error) => {
         alert('There was an error trying to modify your plugin')
+
+        return { error }
       })
   }
 

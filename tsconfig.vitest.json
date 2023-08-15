@@ -4,6 +4,6 @@
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": ["node", "jsdom", "@types/jest", "jest"]
+    "types": ["node", "jsdom", "@types/jest", "jest", "@testing-library/jest-dom"]
   }
 }

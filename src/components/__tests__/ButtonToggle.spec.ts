@@ -1,9 +1,6 @@
 import { expect, test, describe } from 'vitest'
 import { fireEvent, render } from '@testing-library/vue'
 import Component from '@/components/ButtonToggle.vue'
-import * as matchers from '@testing-library/jest-dom/matchers'
-
-expect.extend(matchers)
 
 describe('ButtonToggle', () => {
   test('emits value on click', async () => {
