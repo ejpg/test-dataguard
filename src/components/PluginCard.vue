@@ -104,7 +104,7 @@ const changeToggleState = (event: Event): void => {
       color: $toggle-red;
     }
     &-button {
-      margin-bottom: 0.4rem;
+      transform: scale(0.8);
     }
   }
 }
